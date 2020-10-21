@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+
+<form method="GET" action="weather-form">
+	<input name="city" placeholder="Enter city">
+	<button type="submit">Submit</button>
+</form>
+
+<p th:if="${temp}">Today's temperature in 
+	<span th:text="${location}"></span> 
+	is 
+	<span th:text="${temp}"></span>
+</p>
+
+</body>
+</html>
