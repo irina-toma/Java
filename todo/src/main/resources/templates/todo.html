@@ -2,9 +2,10 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
+
 <title>Insert title here</title>
 
-	<script>
+<script>
 		document.addEventListener("DOMContentLoaded", onLoad);
 		
 		function onLoad() {
@@ -20,7 +21,7 @@
 			var table = document.getElementById("todoTable");
 			
 			var request = new XMLHttpRequest();
-			request.open("GET", "http://localhost:8080/api/todo");
+			request.open("GET", "http://localhost:8080/api/todos");
 			request.send();
 			
 			request.onload = () => {
@@ -47,7 +48,7 @@
 					row.appendChild(tdTitle);
 					row.appendChild(tdDesc);
 					
-					table.appendChild(row);
+					table.tBodies[0].appendChild(row);
 					
 					tdTitle.setAttribute("data-id", todo.id);
 					tdTitle.addEventListener("click", onClickTodoTitle);
@@ -82,22 +83,24 @@
 		function onClickAddBtn() {}
 		
 		
-	</script>	
+	</script>
 </head>
 
 
 
-<body>
+<body style="margin-left: 100px">
 	<p>My TODO list</p>
 	<button id="addBtn">Add</button>
 	<table id="todoTable">
-		<th>
-			<td>Title</td>
-			<td>Delete</td>
-		</th>
+		<tr>
+			<th>Title
+			</td>
+			<th>Delete
+			</td>
+		</tr>
 		<!-- adaugam randurile automat -->
 	</table>
 	<div id="todoDetails"></div>
-	
+
 </body>
 </html>

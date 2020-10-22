@@ -1,11 +1,11 @@
 package com.link.todo;
 
 public class Todo {
-	private int id;
+	private Integer id;
 	private String title;
 	private String desc;
 	private String status;
-	private boolean inProgress;
+	private Boolean inProgress;
 
 	public String getTitle() {
 		return title;
@@ -31,15 +31,15 @@ public class Todo {
 		this.status = status;
 	}
 
-	public boolean isInProgress() {
+	public Boolean isInProgress() {
 		return inProgress;
 	}
 
-	public void setInProgress(boolean inProgress) {
+	public void setInProgress(Boolean inProgress) {
 		this.inProgress = inProgress;
 	}
 
-	public Todo(int id, String title, String desc, String status, boolean inProgress) {
+	public Todo(Integer id, String title, String desc, String status, Boolean inProgress) {
 		super();
 		this.id = id;
 		this.title = title;
@@ -48,15 +48,18 @@ public class Todo {
 		this.inProgress = inProgress;
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	
-	
+	@Override
+	public String toString() {
+		return this.title + " " + this.desc;
+	}
 
 	
 

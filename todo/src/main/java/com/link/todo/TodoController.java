@@ -5,9 +5,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -44,8 +50,8 @@ public class TodoController {
 //		return todoList;
 //	}
 	
-	@GetMapping("/api/todo") 
-	public ResponseEntity<List<Todo>> getTodos2() {
+	@GetMapping("/api/todos") 
+	public ResponseEntity<List<Todo>> getTodos() {
 		Todo todo1 = new Todo(1, "Mail factura", "Mail catre RoCHI pt factura", "not started", false);
 		Todo todo2 = new Todo(2, "HTTPS", "Semantic HTTPS - urgent", "not started", false);
 		Todo todo3 = new Todo(3, "Articol UNESCO", "De scris articol 8-10 pagini", "not started", false);
@@ -55,7 +61,37 @@ public class TodoController {
 		todos.add(todo2);
 		todos.add(todo3);
 		return ResponseEntity.ok(todos);
-		
+	}
+	
+	@GetMapping("/api/todos/{id}")
+	public ResponseEntity<Todo> getTodoById(@PathVariable("id") int id) {
+		System.out.println(id);
+		return ResponseEntity.ok(null);
+	}
+	
+	
+	
+	
+	
+	
+	
+	@PostMapping(value="/api/todos")
+	public ResponseEntity<Todo> createTodo(@RequestBody Todo newTodo) {
+		System.out.println(newTodo);
+		return ResponseEntity.ok(null);
+	}
+	
+	@PutMapping(value="/api/todos/{id}")
+	public ResponseEntity<Todo> updateTodo(@PathVariable("id") int id, @RequestBody Todo newTodo) {
+		System.out.println(id);
+		System.out.println(newTodo);
+		return ResponseEntity.ok(null);
+	}
+	
+	@DeleteMapping("/api/todos/{id}")
+	public ResponseEntity<Todo> deleteTodo(@PathVariable("id") int id) {
+		System.out.println(id);
+		return ResponseEntity.ok(null);
 	}
 	
 }
