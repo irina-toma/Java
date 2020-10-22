@@ -19,6 +19,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class TodoController {
+	
+	List<Todo> todos;
 
 	@GetMapping("/todo")
 	public ModelAndView listTodos() {
@@ -52,33 +54,42 @@ public class TodoController {
 	
 	@GetMapping("/api/todos") 
 	public ResponseEntity<List<Todo>> getTodos() {
-		Todo todo1 = new Todo(1, "Mail factura", "Mail catre RoCHI pt factura", "not started", false);
-		Todo todo2 = new Todo(2, "HTTPS", "Semantic HTTPS - urgent", "not started", false);
-		Todo todo3 = new Todo(3, "Articol UNESCO", "De scris articol 8-10 pagini", "not started", false);
-		
-		List<Todo> todos = new ArrayList<Todo>();
-		todos.add(todo1);
-		todos.add(todo2);
-		todos.add(todo3);
-		return ResponseEntity.ok(todos);
+		if (this.todos == null) {
+			this.todos = new ArrayList<Todo>();
+		}
+		return ResponseEntity.ok(this.todos);
 	}
 	
 	@GetMapping("/api/todos/{id}")
 	public ResponseEntity<Todo> getTodoById(@PathVariable("id") int id) {
 		System.out.println(id);
+		
+		for (int i = 0; i < this.todos.size(); i++) {
+			if (this.todos.get(i).getId().equals(id)) {
+				return ResponseEntity.ok(this.todos.get(i));
+			}
+		}
+		
 		return ResponseEntity.ok(null);
 	}
-	
-	
-	
-	
-	
-	
 	
 	@PostMapping(value="/api/todos")
 	public ResponseEntity<Todo> createTodo(@RequestBody Todo newTodo) {
 		System.out.println(newTodo);
-		return ResponseEntity.ok(null);
+		
+		// set default fields that the DB would set
+		newTodo.setInProgress(false);
+		newTodo.setStatus("not started");
+		if (this.todos.size() == 0) {
+			newTodo.setId(1);
+		} else {
+			Todo lastElem = this.todos.get(this.todos.size() - 1);
+			newTodo.setId(lastElem.getId() + 1);
+		}
+		
+		this.todos.add(newTodo);
+		
+		return ResponseEntity.ok(newTodo);
 	}
 	
 	@PutMapping(value="/api/todos/{id}")
@@ -91,6 +102,14 @@ public class TodoController {
 	@DeleteMapping("/api/todos/{id}")
 	public ResponseEntity<Todo> deleteTodo(@PathVariable("id") int id) {
 		System.out.println(id);
+		for (int i = 0; i < this.todos.size(); i ++) {
+			if (this.todos.get(i).getId().equals(id)) {
+				Todo deletedTodo = this.todos.get(i);
+				this.todos.remove(i);
+				return ResponseEntity.ok(deletedTodo);
+			}
+		}
+		
 		return ResponseEntity.ok(null);
 	}
 	
