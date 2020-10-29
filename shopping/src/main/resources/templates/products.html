@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+	integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+	crossorigin="anonymous">
+
+</head>
+<body>
+	<div id="container" class="d-flex"></div>
+	<script>
+		document.addEventListener("DOMContentLoaded", onLoad);
+		function onLoad() {
+			var request = new XMLHttpRequest();
+			request.open("GET", "http://localhost:8080/api/products");
+			request.send();
+			
+			request.onload = () => {
+				var products = JSON.parse(request.response);
+				
+				var container = document.getElementById("container");
+				
+				for (var product of products) {
+					var card = document.createElement("div");
+					card.classList.add("card", "col-3");
+					
+					var image = document.createElement("img");
+					image.classList.add("card-img-top");
+					image.setAttribute("src", "http://localhost:8080/img/" + product.name.toLowerCase() + ".jpg");
+					
+					var cardBody = document.createElement("div");
+					cardBody.classList.add("card-body");
+					
+					var title = document.createElement("h5");
+					title.classList.add("card-title");
+					title.innerHTML = product.name;
+					
+					var price = document.createElement("p");
+					price.classList.add("card-text");
+					price.innerHTML = product.price + " RON";
+					
+					var quantity = document.createElement("p");
+					quantity.classList.add("card-text");
+					quantity.innerHTML = product.quantity;
+					
+					if (product.quantity < 5) {
+						quantity.classList.add("text-danger");
+					} else if (product.quantity < 30) {
+						quantity.classList.add("text-warning");
+					} else {
+						quantity.classList.add("text-success");
+					}
+					
+					var footer = document.createElement("div");
+					footer.classList.add("card-footer", "d-flex");
+					
+					var quantityInput = document.createElement("input");
+					quantityInput.classList.add("form-group", "mr-3");
+					quantityInput.setAttribute("id", "quantity");
+					
+					var addToCartBtn = document.createElement("button");
+					addToCartBtn.classList.add("btn", "btn-primary");
+					addToCartBtn.setAttribute("data-idf", product.id);
+					addToCartBtn.innerHTML = "Adauga";
+					
+					addToCartBtn.addEventListener("click", addToCart);
+					
+					cardBody.appendChild(title);
+					cardBody.appendChild(price);
+					cardBody.appendChild(quantity);
+					
+					footer.appendChild(quantityInput);
+					footer.appendChild(addToCartBtn);
+					
+					card.appendChild(image);
+					card.appendChild(cardBody);
+					card.appendChild(footer);
+					
+					container.appendChild(card);
+				}
+			}
+		}
+		
+		function addToCart(event) {
+			var target = event.target;
+			var idf = parseInt(target.getAttribute("data-idf"));
+			var quantityInput = target.previousElementSibling;
+			var quantity = quantityInput.value;
+			
+			var params = {productId: idf, quantity: quantity};
+			
+			var request = new XMLHttpRequest();
+			request.open("POST", "http://localhost:8080/api/cart");
+			request.setRequestHeader("Content-type", "application/json");
+			request.send(JSON.stringify(params));
+			
+			request.onload = () => {
+				console.log(request);
+			}
+			
+		}
+	</script>
+</body>
+</html>
