@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+	integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+	crossorigin="anonymous">
+</head>
+<body>
+
+	<div id="container" class="container">
+		<table class="table" id="table">
+			<thead class="thead-dark">
+				<tr>
+					<th scope="col">Name</th>
+					<th scope="col">Quantity</th>
+					<th scope="col">Price</th>
+					<th scope="col">Total price</th>
+				</tr>
+			</thead>
+
+		</table>
+	</div>
+
+	<script>
+document.addEventListener("DOMContentLoaded", onLoad);
+
+function onLoad() {
+	getProductsForAuthUser();
+}
+
+function getProductsForAuthUser() {
+	var request = new XMLHttpRequest();
+	request.open("GET", "http://localhost:8080/api/cart");
+	request.send();
+	
+	request.onload = () => {
+		var products = JSON.parse(request.response);
+		var sum = 0;
+		
+		var table = document.getElementById("table");
+		
+		for (var product of products) {
+			sum += (product.price * product.quantity);
+			var row = table.insertRow();
+			
+			var name = row.insertCell(0);
+			name.innerHTML = product.name;
+			
+			var quantity = row.insertCell(1);
+			quantity.innerHTML = product.quantity;
+			
+			var price = row.insertCell(2);
+			price.innerHTML = product.price;
+			
+			var totalPrice = row.insertCell(3);
+			totalPrice.innerHTML = (product.price * product.quantity).toFixed(2);
+		}
+		
+		var row = table.insertRow();
+		row.insertCell(0);
+		row.insertCell(1);
+		row.insertCell(2);
+		var totalPrice = row.insertCell(3);
+		totalPrice.innerHTML = sum;
+	}
+}
+</script>
+</body>
+</html>
