@@ -6,6 +6,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.ChoiceDialog;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -14,11 +16,13 @@ public class DialogBoxExample extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-		alertInfo();
+//		alertInfo();
 //		alertWarning();
 //		alertError();
 //		alertConfirm();
 //      alertConfirmCustom();
+//      textInputDialog();
+        choiceDialog();
 
         VBox vbox = new VBox();
 
@@ -107,6 +111,31 @@ public class DialogBoxExample extends Application {
         }
     }
 
+    private void textInputDialog() {
+        // TextInputDialog dialog
+        TextInputDialog tid = new TextInputDialog("Please enter text");
 
+        tid.setTitle("TextInputDialog Dialog");
+        tid.setHeaderText("Hi, I am a text input dialog!");
+        tid.setContentText("Please input yor name");
+
+        Optional<String> result = tid.showAndWait();
+        System.out.println(result.get());
+    }
+
+    private void choiceDialog() {
+        // Choice dialog
+        String days[] = { "Monday", "Tuesday", "Wednesday",
+                "Thursday", "Friday", "Saturday", "Sunday"};
+        ChoiceDialog cd = new ChoiceDialog(days[1], days);
+
+        cd.setTitle("Choice Dialog");
+        cd.setHeaderText("Hi, I am a choice dialog!");
+        cd.setContentText("Select the best day from the week:");
+
+        Optional<String> result = cd.showAndWait();
+        System.out.println(result.get());
+
+    }
 
 }
