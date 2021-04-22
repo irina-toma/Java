@@ -26,7 +26,6 @@ import com.app.web.models.UserMapper;
 
 @Controller
 public class UsersController {
-//	TODO: github
 	@Autowired
 	JdbcTemplate jdbcTemplate;
 
@@ -67,12 +66,6 @@ public class UsersController {
 	}
 
 	@GetMapping("/login-form")
-//	http://localhost:8080/login-form?email=lalala@yahoo.com&password=xyz
-//	HashMap<String, String> -> requestParam
-//	{
-//		email: lalala@yahoo.com
-//		password: xyz
-//	}
 	public ModelAndView login(
 			@RequestParam(name = "email", required = true) String email,
 			@RequestParam(name = "password", required = true) String password) {
