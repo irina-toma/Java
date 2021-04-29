@@ -33,9 +33,16 @@ public class Controller {
     }
 
     protected void showOtherPage(String resourceName, Stage stage) throws IOException {
-        Parent root = FXMLLoader.load(getClass()
-                .getResource(resourceName));
+        Parent root = FXMLLoader.load(getClass().getResource(resourceName));
         Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    protected void showOtherPage(Controller controller, String resourceName, Stage stage) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(resourceName));
+        loader.setController(controller);
+        Scene scene = new Scene(loader.load());
         stage.setScene(scene);
         stage.show();
     }

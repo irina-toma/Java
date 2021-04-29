@@ -8,6 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import model.User;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -20,6 +21,8 @@ public class LoginController extends Controller{
     public PasswordField passwordTf;
     public Button submitBtn;
     public Button registerBtn;
+
+    private User user;
 
     public void onClickSubmit(ActionEvent actionEvent) {
         String email = emailTf.getText();
@@ -36,6 +39,9 @@ public class LoginController extends Controller{
             statement.setString(2, password);
             ResultSet rs = statement.executeQuery();
             if (rs.next()) {
+                user = new User(rs.getInt("id"),
+                        rs.getString("email"),
+                        rs.getString("name"));
                 showMainHotelPage();
             } else {
                 // nu avem un user cu aceste credentiale
@@ -59,10 +65,9 @@ public class LoginController extends Controller{
     }
 
     private void showMainHotelPage() throws IOException {
+        HotelController hc = new HotelController(user);
         String resourceName = "../hotel.fxml";
         Stage stage = (Stage) submitBtn.getScene().getWindow();
-        showOtherPage(resourceName, stage);
+        showOtherPage(hc, resourceName, stage);
     }
-
-
 }

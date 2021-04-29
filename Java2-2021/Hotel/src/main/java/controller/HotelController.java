@@ -6,6 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import model.User;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -19,6 +20,12 @@ public class HotelController extends Controller {
     public Text addressLabel;
     public Text roomsLabel;
     public Button showRoomsBtn;
+
+    private User user;
+
+    public HotelController(User user) {
+        this.user = user;
+    }
 
     public void showMainInfo() {
         // conectare la db
@@ -41,9 +48,10 @@ public class HotelController extends Controller {
     }
 
     public void onClickShowRooms(ActionEvent actionEvent) throws IOException {
+        RoomsController rc = new RoomsController(user);
         String resourceName = "../roomsList.fxml";
         Stage stage = (Stage) showRoomsBtn.getScene().getWindow();
-        showOtherPage(resourceName, stage);
+        showOtherPage(rc, resourceName, stage);
     }
 
     @FXML
