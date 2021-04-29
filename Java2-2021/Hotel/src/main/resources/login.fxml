@@ -48,7 +48,7 @@
             <Insets />
          </GridPane.margin>
       </PasswordField>
-      <Button fx:id="submitBtn" onAction="#onClickSubmit" mnemonicParsing="false" prefHeight="25.0" prefWidth="186.0" style="-fx-background-color: azure; -fx-border-color: blue; -fx-border-radius: 5; -fx-background-radius: 5;" text="Submit" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="3">
+      <Button styleClass="dark-blue" fx:id="submitBtn" onAction="#onClickSubmit" mnemonicParsing="false" prefHeight="25.0" prefWidth="186.0" text="Submit" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="3">
          <font>
             <Font size="20.0" />
          </font>
@@ -56,7 +56,7 @@
             <Insets right="20.0" />
          </GridPane.margin>
       </Button>
-      <Button fx:id="registerBtn" onAction="#onClickRegister" mnemonicParsing="false" prefHeight="27.0" prefWidth="144.0" style="-fx-background-color: pink; -fx-border-color: red; -fx-border-radius: 5; -fx-background-radius: 5;" text="Register" GridPane.rowIndex="3">
+      <Button styleClass="bevel-grey" fx:id="registerBtn" onAction="#onClickRegister" mnemonicParsing="false" prefHeight="27.0" prefWidth="144.0" text="Register" GridPane.rowIndex="3">
          <GridPane.margin>
             <Insets left="20.0" right="20.0" />
          </GridPane.margin>

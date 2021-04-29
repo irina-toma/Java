@@ -10,7 +10,9 @@ public class Main extends Application {
         Parent root = FXMLLoader.load(getClass()
                 .getResource("login.fxml"));
         primaryStage.setTitle("Hotel");
-        primaryStage.setScene(new Scene(root, 500, 500));
+        Scene scene = new Scene(root, 500, 500);
+        scene.getStylesheets().add(getClass().getResource("./css/styles.css").toExternalForm());
+        primaryStage.setScene(scene);
         primaryStage.show();
     }
 }

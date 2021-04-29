@@ -1,6 +1,7 @@
 package controller;
 
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
@@ -22,10 +23,12 @@ public class ReservationController extends Controller {
         this.room = room;
     }
 
+    @FXML
     public void onReserveBtnClick(ActionEvent actionEvent) {
         System.out.println(this.reservationDate.getValue());
     }
 
+    @FXML
     public void initialize() {
         this.usernameLabel.setText(user.getName());
         this.roomNameLabel.setText(room.getDescription());

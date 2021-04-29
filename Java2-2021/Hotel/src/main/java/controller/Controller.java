@@ -39,6 +39,14 @@ public class Controller {
         stage.show();
     }
 
+    protected void showOtherPage(String resourceName, Stage stage, String css) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource(resourceName));
+        Scene scene = new Scene(root);
+        scene.getStylesheets().add(getClass().getResource(css).toExternalForm());
+        stage.setScene(scene);
+        stage.show();
+    }
+
     protected void showOtherPage(Controller controller, String resourceName, Stage stage) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(resourceName));
         loader.setController(controller);
@@ -46,4 +54,15 @@ public class Controller {
         stage.setScene(scene);
         stage.show();
     }
+
+    protected void showOtherPage(Controller controller, String resourceName, Stage stage, String css) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(resourceName));
+        loader.setController(controller);
+        Scene scene = new Scene(loader.load());
+        scene.getStylesheets().add(getClass().getResource(css).toExternalForm());
+        stage.setScene(scene);
+        stage.show();
+    }
+
+
 }
