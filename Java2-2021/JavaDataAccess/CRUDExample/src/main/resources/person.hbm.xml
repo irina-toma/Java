@@ -3,15 +3,15 @@
  "-//Hibernate/Hibernate Mapping DTD//EN"
  "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> 
 <hibernate-mapping>
-    <class name="model.Person" table="person">
+    <class name="simplehibernatemapping.Person" table="person">
         <meta attribute="class-description">
             This class contains the person details 
         </meta>
-        <id name="id" type="int" column="person_id">
+        <id name="id" type="int" column="id">
             <generator class="increment"/>
         </id>
-        <property name="firstName" column="first_name" type="string"/>
-        <property name="lastName" column="last_name" type="string"/>
+        <property name="firstName" column="firstname" type="string"/>
+        <property name="lastName" column="lastname" type="string"/>
         <property name="age" column="age" type="int"/>
     </class>
 </hibernate-mapping>

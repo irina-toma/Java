@@ -7,14 +7,15 @@
             com.mysql.cj.jdbc.Driver
         </property>
         <property name="hibernate.connection.url">
-            jdbc:mysql://localhost:3306/auth
+            jdbc:mysql://localhost:3306/link?useUnicode=true&amp;useJDBCCompliantTimezoneShift=true&amp;useLegacyDatetimeCode=false&amp;serverTimezone=UTC&amp;useSSL=false
         </property> 
         <property name="hibernate.connection.username">auth</property>
         <property name="hibernate.connection.password">auth</property>
         <property name="hibernate.connection.pool_size">50</property>
         <property name="show_sql">true</property>
         <property name="hibernate.hbm2ddl.auto">update</property>
-        <mapping resource="person.hbm.xml"/> 
-        <mapping class="model.Person"/> 
+<!--        <mapping resource="person.hbm.xml"/> -->
+<!--        <mapping class="simplehibernatemapping.Person"/>-->
+        <mapping class="model.Person2"/>
     </session-factory>
 </hibernate-configuration>
