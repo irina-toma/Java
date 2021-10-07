@@ -110,6 +110,8 @@ public class DialogExample extends Application {
 		    System.out.println("Nothing...");
 		}
 	}
+	
+	//comentariu
 
 
 
