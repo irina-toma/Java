@@ -149,5 +149,7 @@ public class Spanzuratoarea extends Application{
 			alert.showAndWait();
 		}
 	}
+	
+	// comentariu grupa 2 java
 
 }
